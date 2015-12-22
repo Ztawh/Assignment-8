@@ -22,6 +22,8 @@ end
 
 @in_store_wares = []
 
+@sold_wares = []
+
 
 
 def print_menu
@@ -82,7 +84,7 @@ def add_to_inventory
   when 0
     puts "Cancelled"
     return
-  when 1..@wares.length
+  when 1..@wares.length # .. range
     # Create an instance of the chosen ware
     classname = @wares[choice.to_i - 1]
     ware = classname.new
@@ -120,7 +122,8 @@ def sell_ware
       return
     when 1..@in_store_wares.length
       ware = @in_store_wares[choice.to_i - 1]
-      ware.sell
+      @sold_wares.push(ware)
+      @in_store_wares.delete_at(choice.to_i - 1)
     end
 
 
@@ -130,9 +133,13 @@ def sell_ware
 end
 
 def print_sold_wares
-  unless sold_wares.empty?
+  unless @sold_wares.empty?
     puts "Here are the wares we've sold thus far:"
     # TODO: Implement
+    @sold_wares.each do |ware|
+      puts ware
+    end
+
   else
     puts "We haven't sold anything yet!"
   end

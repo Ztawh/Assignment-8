@@ -5,8 +5,8 @@ class Daimstrut < Ware
         "$3.29"
     end
 
-    def self.sell
-        @sold = true
+    def price
+        self.class.price
     end
 
     def to_s

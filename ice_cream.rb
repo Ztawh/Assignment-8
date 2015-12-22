@@ -7,8 +7,8 @@ class IceCream < Ware
     "$2.95"
   end
 
-  def self.sell
-    @sold = true
+  def price
+    self.class.price
   end
 
   def to_s

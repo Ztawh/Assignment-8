@@ -4,7 +4,7 @@ class Ware
     "No price"
   end
 
-  def self.sell
-    @sold = true
+  def price
+    self.class.price
   end
 end
