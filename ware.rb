@@ -7,4 +7,12 @@ class Ware
   def price
     self.class.price
   end
+
+  def sell()
+    @sold = true
+  end
+
+  def is_sold?
+    @sold
+  end
 end

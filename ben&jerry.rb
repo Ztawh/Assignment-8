@@ -1,6 +1,6 @@
 require_relative "ware"
 
-class BenAndJerry
+class BenAndJerry < Ware
     def self.price
         "$4.95"
     end

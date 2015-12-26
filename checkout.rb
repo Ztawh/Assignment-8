@@ -22,7 +22,7 @@ end
 
 @in_store_wares = []
 
-@sold_wares = []
+@all_wares = []
 
 
 
@@ -91,6 +91,7 @@ def add_to_inventory
 
     # Add it to the in-store wares
     @in_store_wares.push(ware)
+    @all_wares.push(ware)
   end
 end
 
@@ -121,8 +122,17 @@ def sell_ware
       puts "Cancelled"
       return
     when 1..@in_store_wares.length
-      ware = @in_store_wares[choice.to_i - 1]
-      @sold_wares.push(ware)
+      classname = @wares[0]
+      @wares.each_with_index do |element, index|
+        if @in_store_wares[choice.to_i - 1] == @wares[index]
+          classname = @wares[index]
+        end
+      end
+
+      ware = classname.new
+      ware.sell()
+      @all_wares.push(ware)
+
       @in_store_wares.delete_at(choice.to_i - 1)
     end
 
@@ -133,19 +143,24 @@ def sell_ware
 end
 
 def print_sold_wares
-  unless @sold_wares.empty?
-    puts "Here are the wares we've sold thus far:"
     # TODO: Implement
-    @sold_wares.each do |ware|
-      puts ware
+  sold = false
+
+  @all_wares.each do |ware|
+    sold = true if ware.is_sold?
+  end
+
+  if sold
+    puts "Here are the wares we've sold thus far:"
+
+    @all_wares.each do |ware|
+      puts ware if ware.is_sold?
     end
 
   else
     puts "We haven't sold anything yet!"
   end
 end
-
-puts
 
 puts "Welcome to the Super Awesome™ checkout system!"
 
