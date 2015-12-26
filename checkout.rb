@@ -24,8 +24,6 @@ end
 
 @all_wares = []
 
-
-
 def print_menu
   puts "\nMenu"
   puts "#--------------------------"
@@ -135,7 +133,6 @@ def sell_ware
 
       @in_store_wares.delete_at(choice.to_i - 1)
     end
-
 
   else
     puts "There are no wares to sell! :O"
